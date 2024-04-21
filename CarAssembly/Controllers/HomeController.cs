@@ -1,3 +1,4 @@
+using CarAssembly.Database.Models;
 using CarAssembly.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
