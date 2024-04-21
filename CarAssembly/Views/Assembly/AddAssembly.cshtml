@@ -1,0 +1,66 @@
+﻿@using CarAssembly.ModelDtos.Assembly
+@model AssemblyFormDto
+@{
+
+    var msg = TempData["error"];
+}
+
+<div class="row">
+    @if (msg != null)
+    {
+        <h3 class="alert-warning">@msg</h3>
+    }
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+
+        <h2 class="heading-margin text-center">Add Assembly</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="CarId"></label>
+                <select asp-for="CarId" class="form-control">
+                    @foreach (var car in Model.Cars)
+                    {
+                        <option value="@car.Id">@car.Brand - @car.Model - @car.Kilometers - @car.Year</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Name">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Condtion">Condition</label>
+                <select asp-for="Condtion" class="form-control">
+                    @foreach (var condition in Model.Condtions)
+                    {
+                        <option value="@condition">@condition</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" placeholder="Description">
+                <span asp-validation-for="Description" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId">Category</label>
+                <select asp-for="CategoryId" class="form-control">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Category" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Picture"></label>
+                <input type="file" id="files" asp-for="Picture" />
+                <span asp-validation-for="Picture" class="small text-danger"></span>
+            </div>
+
+            <input class="btn btn-primary mt-3" type="submit" value="Save" />
+        </form>
+
+    </div>
+</div>
