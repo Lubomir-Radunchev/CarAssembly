@@ -49,7 +49,7 @@ namespace CarAssembly.Controllers
                 return View();
             }
 
-            var empDTO1 = mapper.Map<Assembly>(assembly);
+            var assemblyEntity = mapper.Map<Assembly>(assembly);
 
             byte[] photo = new byte[8000];
             foreach (var item in Picture)
@@ -64,9 +64,9 @@ namespace CarAssembly.Controllers
                 }
             }
 
-            empDTO1.Picture = photo;
+            assemblyEntity.Picture = photo;
 
-            this.data.Assemblies.Add(empDTO1);
+            this.data.Assemblies.Add(assemblyEntity);
             this.data.SaveChanges();
 
             return RedirectToAction("Add", "Assembly");

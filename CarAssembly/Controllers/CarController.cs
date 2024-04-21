@@ -20,12 +20,11 @@ namespace CarAssembly.Controllers
         [HttpGet]
         public IActionResult AddCar()
         {
-            CarFromDto carFromDto = new CarFromDto();
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddCar(Car car)
+        public IActionResult AddCar(CarFromDto car)
         {
             if (String.IsNullOrEmpty(car.Model))
             {
@@ -39,8 +38,10 @@ namespace CarAssembly.Controllers
                 TempData["error"] = "Try Again";
                 return View();
             }
+            var carEntity = mapper.Map<Car>(car);
+            // assemblyEntity.Picture = photo;
 
-            this.data.Cars.Add(car);
+            this.data.Cars.Add(carEntity);
             this.data.SaveChanges();
 
             return RedirectToAction("Index", "Home");
