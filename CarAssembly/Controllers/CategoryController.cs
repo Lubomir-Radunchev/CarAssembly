@@ -1,4 +1,5 @@
-﻿using CarAssembly.Models;
+﻿using CarAssembly.Database.Models;
+using CarAssembly.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarAssembly.Controllers
@@ -14,13 +15,13 @@ namespace CarAssembly.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult AddCategory()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Category category)
+        public IActionResult AddCategory(Category category)
         {
             if (String.IsNullOrEmpty(category.Name))
             {
