@@ -1,4 +1,7 @@
-﻿using CarAssembly.Models;
+﻿using AutoMapper;
+using CarAssembly.Database.Models;
+using CarAssembly.ModelDtos.CarDtos;
+using CarAssembly.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarAssembly.Controllers
@@ -7,17 +10,22 @@ namespace CarAssembly.Controllers
     {
         //dependacy injetion
         private readonly ApplicationDbContext data;
-        public CarController(ApplicationDbContext data)
+        private readonly IMapper mapper;
+        public CarController(ApplicationDbContext data, IMapper mapper)
         {
+            this.mapper = mapper;
             this.data = data;
         }
+
         [HttpGet]
-            public IActionResult Add()
-            {
-                return View();
-            }
+        public IActionResult AddCar()
+        {
+            CarFromDto carFromDto = new CarFromDto();
+            return View();
+        }
+
         [HttpPost]
-        public IActionResult Add(Car car)
+        public IActionResult AddCar(Car car)
         {
             if (String.IsNullOrEmpty(car.Model))
             {
@@ -29,7 +37,7 @@ namespace CarAssembly.Controllers
             {
                 // message: try again 
                 TempData["error"] = "Try Again";
-                return View();                                      
+                return View();
             }
 
             this.data.Cars.Add(car);
