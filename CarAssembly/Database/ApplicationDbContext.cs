@@ -30,5 +30,6 @@ namespace CarAssembly.Models
         public DbSet<Car> Cars { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Assembly> Assemblies { get; set; }
+        public DbSet<ShowCar> ShowCars { get; set; }
     }
 }
